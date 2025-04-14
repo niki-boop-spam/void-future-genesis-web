@@ -2,6 +2,7 @@
 import { useRef, useEffect } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { Sphere, MeshDistortMaterial } from '@react-three/drei';
+import * as THREE from 'three';
 
 type VoidSphereProps = {
   color?: string;
