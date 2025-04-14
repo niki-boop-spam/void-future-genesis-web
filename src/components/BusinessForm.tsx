@@ -3,9 +3,11 @@ import { useState } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { useToast } from '@/hooks/use-toast';
 import { X } from 'lucide-react';
+import { supabase } from '@/integrations/supabase/client';
 
 export const BusinessForm = ({ open, onClose }: { open: boolean; onClose: () => void }) => {
   const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
@@ -61,7 +63,7 @@ export const BusinessForm = ({ open, onClose }: { open: boolean; onClose: () => 
     return newErrors;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     const newErrors = validateForm();
@@ -70,27 +72,60 @@ export const BusinessForm = ({ open, onClose }: { open: boolean; onClose: () => 
       return;
     }
     
-    // Form submission logic would go here
-    
-    toast({
-      title: "Request Submitted",
-      description: "Thank you for reaching out! We'll get back to you soon.",
-    });
-    
-    // Reset form and close
-    setFormData({
-      fullName: '',
-      email: '',
-      phone: '',
-      company: '',
-      role: '',
-      website: '',
-      purpose: '',
-      message: '',
-      preferredTime: '',
-      consent: false
-    });
-    onClose();
+    setIsSubmitting(true);
+
+    try {
+      // Insert form data into Supabase
+      const { error } = await supabase.from('business_submissions').insert({
+        full_name: formData.fullName,
+        email: formData.email,
+        phone: formData.phone,
+        company: formData.company,
+        role: formData.role,
+        website: formData.website || null,
+        purpose: formData.purpose,
+        message: formData.message,
+        preferred_time: formData.preferredTime
+      });
+
+      if (error) {
+        console.error('Error submitting form:', error);
+        toast({
+          title: "Submission Failed",
+          description: "There was an error submitting your request. Please try again.",
+          variant: "destructive"
+        });
+      } else {
+        toast({
+          title: "Request Submitted",
+          description: "Thank you for reaching out! We'll get back to you soon.",
+        });
+        
+        // Reset form and close
+        setFormData({
+          fullName: '',
+          email: '',
+          phone: '',
+          company: '',
+          role: '',
+          website: '',
+          purpose: '',
+          message: '',
+          preferredTime: '',
+          consent: false
+        });
+        onClose();
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      toast({
+        title: "Submission Failed",
+        description: "There was an error submitting your request. Please try again.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -119,6 +154,7 @@ export const BusinessForm = ({ open, onClose }: { open: boolean; onClose: () => 
                 value={formData.fullName}
                 onChange={handleChange}
                 className={`input-field ${errors.fullName ? 'border-semantic-error-light' : ''}`}
+                disabled={isSubmitting}
               />
               {errors.fullName && <p className="mt-1 text-sm text-semantic-error-light">{errors.fullName}</p>}
             </div>
@@ -132,6 +168,7 @@ export const BusinessForm = ({ open, onClose }: { open: boolean; onClose: () => 
                 value={formData.email}
                 onChange={handleChange}
                 className={`input-field ${errors.email ? 'border-semantic-error-light' : ''}`}
+                disabled={isSubmitting}
               />
               {errors.email && <p className="mt-1 text-sm text-semantic-error-light">{errors.email}</p>}
             </div>
@@ -145,6 +182,7 @@ export const BusinessForm = ({ open, onClose }: { open: boolean; onClose: () => 
                 value={formData.phone}
                 onChange={handleChange}
                 className={`input-field ${errors.phone ? 'border-semantic-error-light' : ''}`}
+                disabled={isSubmitting}
               />
               {errors.phone && <p className="mt-1 text-sm text-semantic-error-light">{errors.phone}</p>}
             </div>
@@ -158,6 +196,7 @@ export const BusinessForm = ({ open, onClose }: { open: boolean; onClose: () => 
                 value={formData.company}
                 onChange={handleChange}
                 className={`input-field ${errors.company ? 'border-semantic-error-light' : ''}`}
+                disabled={isSubmitting}
               />
               {errors.company && <p className="mt-1 text-sm text-semantic-error-light">{errors.company}</p>}
             </div>
@@ -171,6 +210,7 @@ export const BusinessForm = ({ open, onClose }: { open: boolean; onClose: () => 
                 value={formData.role}
                 onChange={handleChange}
                 className={`input-field ${errors.role ? 'border-semantic-error-light' : ''}`}
+                disabled={isSubmitting}
               />
               {errors.role && <p className="mt-1 text-sm text-semantic-error-light">{errors.role}</p>}
             </div>
@@ -185,6 +225,7 @@ export const BusinessForm = ({ open, onClose }: { open: boolean; onClose: () => 
                 onChange={handleChange}
                 className="input-field"
                 placeholder="https://example.com"
+                disabled={isSubmitting}
               />
             </div>
 
@@ -196,6 +237,7 @@ export const BusinessForm = ({ open, onClose }: { open: boolean; onClose: () => 
                 value={formData.purpose}
                 onChange={handleChange}
                 className={`select-field ${errors.purpose ? 'border-semantic-error-light' : ''}`}
+                disabled={isSubmitting}
               >
                 <option value="">Select a purpose</option>
                 <option value="Request Callback">Request Callback</option>
@@ -218,6 +260,7 @@ export const BusinessForm = ({ open, onClose }: { open: boolean; onClose: () => 
                 onChange={handleChange}
                 className={`input-field ${errors.preferredTime ? 'border-semantic-error-light' : ''}`}
                 placeholder="e.g., Weekdays 9AM-5PM EST"
+                disabled={isSubmitting}
               />
               {errors.preferredTime && <p className="mt-1 text-sm text-semantic-error-light">{errors.preferredTime}</p>}
             </div>
@@ -232,6 +275,7 @@ export const BusinessForm = ({ open, onClose }: { open: boolean; onClose: () => 
               onChange={handleChange}
               className={`textarea-field ${errors.message ? 'border-semantic-error-light' : ''}`}
               placeholder="Tell us how we can help you..."
+              disabled={isSubmitting}
             ></textarea>
             {errors.message && <p className="mt-1 text-sm text-semantic-error-light">{errors.message}</p>}
           </div>
@@ -245,6 +289,7 @@ export const BusinessForm = ({ open, onClose }: { open: boolean; onClose: () => 
                 checked={formData.consent}
                 onChange={handleCheckboxChange}
                 className="h-4 w-4 rounded border-gray-300 text-brand-primary-light focus:ring-brand-primary-light/50"
+                disabled={isSubmitting}
               />
             </div>
             <div className="ml-3 text-sm">
@@ -256,7 +301,13 @@ export const BusinessForm = ({ open, onClose }: { open: boolean; onClose: () => 
           </div>
 
           <div className="flex justify-end">
-            <button type="submit" className="btn-primary">Submit Request</button>
+            <button 
+              type="submit" 
+              className="btn-primary"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? "Submitting..." : "Submit Request"}
+            </button>
           </div>
         </form>
       </DialogContent>

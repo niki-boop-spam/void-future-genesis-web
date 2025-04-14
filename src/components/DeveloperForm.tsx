@@ -3,11 +3,13 @@ import { useState } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { useToast } from '@/hooks/use-toast';
 import { X } from 'lucide-react';
+import { supabase } from '@/integrations/supabase/client';
 
 type EducationOrRole = 'education' | 'role';
 
 export const DeveloperForm = ({ open, onClose }: { open: boolean; onClose: () => void }) => {
   const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formType, setFormType] = useState<EducationOrRole>('education');
   const [formData, setFormData] = useState({
     fullName: '',
@@ -72,7 +74,7 @@ export const DeveloperForm = ({ open, onClose }: { open: boolean; onClose: () =>
     return newErrors;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     const newErrors = validateForm();
@@ -81,30 +83,67 @@ export const DeveloperForm = ({ open, onClose }: { open: boolean; onClose: () =>
       return;
     }
     
-    // Form submission logic would go here
-    
-    toast({
-      title: "Application Submitted",
-      description: "Thank you for your interest! We'll review your application and contact you soon.",
-    });
-    
-    // Reset form and close
-    setFormData({
-      fullName: '',
-      email: '',
-      phone: '',
-      educationYear: '1',
-      educationField: '',
-      workRole: '',
-      experience: '',
-      linkedinUrl: '',
-      githubUrl: '',
-      portfolioUrl: '',
-      bio: '',
-      technologies: '',
-      consent: false
-    });
-    onClose();
+    setIsSubmitting(true);
+
+    try {
+      // Insert form data into Supabase
+      const { error } = await supabase.from('developer_submissions').insert({
+        full_name: formData.fullName,
+        email: formData.email,
+        phone: formData.phone,
+        status: formType,
+        education_year: formType === 'education' ? formData.educationYear : null,
+        education_field: formType === 'education' ? formData.educationField : null,
+        work_role: formType === 'role' ? formData.workRole : null,
+        experience: formType === 'role' ? formData.experience : null,
+        linkedin_url: formData.linkedinUrl || null,
+        github_url: formData.githubUrl || null,
+        portfolio_url: formData.portfolioUrl || null,
+        bio: formData.bio,
+        technologies: formData.technologies
+      });
+
+      if (error) {
+        console.error('Error submitting form:', error);
+        toast({
+          title: "Submission Failed",
+          description: "There was an error submitting your application. Please try again.",
+          variant: "destructive"
+        });
+      } else {
+        toast({
+          title: "Application Submitted",
+          description: "Thank you for your interest! We'll review your application and contact you soon.",
+        });
+        
+        // Reset form and close
+        setFormData({
+          fullName: '',
+          email: '',
+          phone: '',
+          educationYear: '1',
+          educationField: '',
+          workRole: '',
+          experience: '',
+          linkedinUrl: '',
+          githubUrl: '',
+          portfolioUrl: '',
+          bio: '',
+          technologies: '',
+          consent: false
+        });
+        onClose();
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      toast({
+        title: "Submission Failed",
+        description: "There was an error submitting your application. Please try again.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -133,6 +172,7 @@ export const DeveloperForm = ({ open, onClose }: { open: boolean; onClose: () =>
                 value={formData.fullName}
                 onChange={handleChange}
                 className={`input-field ${errors.fullName ? 'border-semantic-error-light' : ''}`}
+                disabled={isSubmitting}
               />
               {errors.fullName && <p className="mt-1 text-sm text-semantic-error-light">{errors.fullName}</p>}
             </div>
@@ -146,6 +186,7 @@ export const DeveloperForm = ({ open, onClose }: { open: boolean; onClose: () =>
                 value={formData.email}
                 onChange={handleChange}
                 className={`input-field ${errors.email ? 'border-semantic-error-light' : ''}`}
+                disabled={isSubmitting}
               />
               {errors.email && <p className="mt-1 text-sm text-semantic-error-light">{errors.email}</p>}
             </div>
@@ -159,6 +200,7 @@ export const DeveloperForm = ({ open, onClose }: { open: boolean; onClose: () =>
                 value={formData.phone}
                 onChange={handleChange}
                 className={`input-field ${errors.phone ? 'border-semantic-error-light' : ''}`}
+                disabled={isSubmitting}
               />
               {errors.phone && <p className="mt-1 text-sm text-semantic-error-light">{errors.phone}</p>}
             </div>
@@ -173,6 +215,7 @@ export const DeveloperForm = ({ open, onClose }: { open: boolean; onClose: () =>
                     checked={formType === 'education'}
                     onChange={() => setFormType('education')}
                     className="mr-2"
+                    disabled={isSubmitting}
                   />
                   <span>Student</span>
                 </label>
@@ -183,6 +226,7 @@ export const DeveloperForm = ({ open, onClose }: { open: boolean; onClose: () =>
                     checked={formType === 'role'}
                     onChange={() => setFormType('role')}
                     className="mr-2"
+                    disabled={isSubmitting}
                   />
                   <span>Professional</span>
                 </label>
@@ -199,6 +243,7 @@ export const DeveloperForm = ({ open, onClose }: { open: boolean; onClose: () =>
                     value={formData.educationYear}
                     onChange={handleChange}
                     className="select-field"
+                    disabled={isSubmitting}
                   >
                     <option value="1">Year 1</option>
                     <option value="2">Year 2</option>
@@ -217,6 +262,7 @@ export const DeveloperForm = ({ open, onClose }: { open: boolean; onClose: () =>
                     value={formData.educationField}
                     onChange={handleChange}
                     className={`input-field ${errors.educationField ? 'border-semantic-error-light' : ''}`}
+                    disabled={isSubmitting}
                   />
                   {errors.educationField && <p className="mt-1 text-sm text-semantic-error-light">{errors.educationField}</p>}
                 </div>
@@ -232,6 +278,7 @@ export const DeveloperForm = ({ open, onClose }: { open: boolean; onClose: () =>
                     value={formData.workRole}
                     onChange={handleChange}
                     className={`input-field ${errors.workRole ? 'border-semantic-error-light' : ''}`}
+                    disabled={isSubmitting}
                   />
                   {errors.workRole && <p className="mt-1 text-sm text-semantic-error-light">{errors.workRole}</p>}
                 </div>
@@ -245,6 +292,7 @@ export const DeveloperForm = ({ open, onClose }: { open: boolean; onClose: () =>
                     value={formData.experience}
                     onChange={handleChange}
                     className={`input-field ${errors.experience ? 'border-semantic-error-light' : ''}`}
+                    disabled={isSubmitting}
                   />
                   {errors.experience && <p className="mt-1 text-sm text-semantic-error-light">{errors.experience}</p>}
                 </div>
@@ -263,6 +311,7 @@ export const DeveloperForm = ({ open, onClose }: { open: boolean; onClose: () =>
                 onChange={handleChange}
                 className="input-field"
                 placeholder="https://linkedin.com/in/yourprofile"
+                disabled={isSubmitting}
               />
             </div>
             
@@ -276,6 +325,7 @@ export const DeveloperForm = ({ open, onClose }: { open: boolean; onClose: () =>
                 onChange={handleChange}
                 className="input-field"
                 placeholder="https://github.com/yourusername"
+                disabled={isSubmitting}
               />
             </div>
             
@@ -289,6 +339,7 @@ export const DeveloperForm = ({ open, onClose }: { open: boolean; onClose: () =>
                 onChange={handleChange}
                 className="input-field"
                 placeholder="https://yourportfolio.com"
+                disabled={isSubmitting}
               />
             </div>
           </div>
@@ -302,6 +353,7 @@ export const DeveloperForm = ({ open, onClose }: { open: boolean; onClose: () =>
               onChange={handleChange}
               className={`textarea-field ${errors.bio ? 'border-semantic-error-light' : ''}`}
               placeholder="Tell us about yourself and why you want to join The Void Company..."
+              disabled={isSubmitting}
             ></textarea>
             {errors.bio && <p className="mt-1 text-sm text-semantic-error-light">{errors.bio}</p>}
           </div>
@@ -316,6 +368,7 @@ export const DeveloperForm = ({ open, onClose }: { open: boolean; onClose: () =>
               onChange={handleChange}
               className={`input-field ${errors.technologies ? 'border-semantic-error-light' : ''}`}
               placeholder="e.g., React, TypeScript, Node.js, Python, ML, AI..."
+              disabled={isSubmitting}
             />
             {errors.technologies && <p className="mt-1 text-sm text-semantic-error-light">{errors.technologies}</p>}
           </div>
@@ -329,6 +382,7 @@ export const DeveloperForm = ({ open, onClose }: { open: boolean; onClose: () =>
                 checked={formData.consent}
                 onChange={handleCheckboxChange}
                 className="h-4 w-4 rounded border-gray-300 text-brand-primary-light focus:ring-brand-primary-light/50"
+                disabled={isSubmitting}
               />
             </div>
             <div className="ml-3 text-sm">
@@ -340,7 +394,13 @@ export const DeveloperForm = ({ open, onClose }: { open: boolean; onClose: () =>
           </div>
 
           <div className="flex justify-end">
-            <button type="submit" className="btn-primary">Submit Application</button>
+            <button 
+              type="submit" 
+              className="btn-primary"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? "Submitting..." : "Submit Application"}
+            </button>
           </div>
         </form>
       </DialogContent>

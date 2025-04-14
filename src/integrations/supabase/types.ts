@@ -9,7 +9,102 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      business_submissions: {
+        Row: {
+          company: string
+          created_at: string
+          email: string
+          full_name: string
+          id: string
+          message: string
+          phone: string
+          preferred_time: string
+          purpose: string
+          role: string
+          website: string | null
+        }
+        Insert: {
+          company: string
+          created_at?: string
+          email: string
+          full_name: string
+          id?: string
+          message: string
+          phone: string
+          preferred_time: string
+          purpose: string
+          role: string
+          website?: string | null
+        }
+        Update: {
+          company?: string
+          created_at?: string
+          email?: string
+          full_name?: string
+          id?: string
+          message?: string
+          phone?: string
+          preferred_time?: string
+          purpose?: string
+          role?: string
+          website?: string | null
+        }
+        Relationships: []
+      }
+      developer_submissions: {
+        Row: {
+          bio: string
+          created_at: string
+          education_field: string | null
+          education_year: string | null
+          email: string
+          experience: string | null
+          full_name: string
+          github_url: string | null
+          id: string
+          linkedin_url: string | null
+          phone: string
+          portfolio_url: string | null
+          status: string
+          technologies: string
+          work_role: string | null
+        }
+        Insert: {
+          bio: string
+          created_at?: string
+          education_field?: string | null
+          education_year?: string | null
+          email: string
+          experience?: string | null
+          full_name: string
+          github_url?: string | null
+          id?: string
+          linkedin_url?: string | null
+          phone: string
+          portfolio_url?: string | null
+          status: string
+          technologies: string
+          work_role?: string | null
+        }
+        Update: {
+          bio?: string
+          created_at?: string
+          education_field?: string | null
+          education_year?: string | null
+          email?: string
+          experience?: string | null
+          full_name?: string
+          github_url?: string | null
+          id?: string
+          linkedin_url?: string | null
+          phone?: string
+          portfolio_url?: string | null
+          status?: string
+          technologies?: string
+          work_role?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
