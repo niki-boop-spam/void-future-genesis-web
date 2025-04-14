@@ -1,8 +1,6 @@
-
 import { useState, useRef } from 'react';
 import { ArrowRight, ChevronDown, Code, Database, FileText, Zap } from 'lucide-react';
 import ThemeToggle from '@/components/ThemeToggle';
-import ThreeScene from '@/components/ThreeScene';
 import DeveloperForm from '@/components/DeveloperForm';
 import BusinessForm from '@/components/BusinessForm';
 import AboutModal from '@/components/AboutModal';
@@ -78,8 +76,8 @@ const Index = () => {
                 </button>
               </div>
             </div>
-            <div className="lg:w-1/2 h-80 md:h-96 w-full">
-              <ThreeScene className="rounded-2xl overflow-hidden shadow-lg" />
+            <div className="lg:w-1/2 h-80 md:h-96 w-full bg-brand-secondary-light/30 dark:bg-brand-secondary-dark/50 rounded-2xl overflow-hidden shadow-lg flex items-center justify-center">
+              <div className="h-24 w-24 rounded-full bg-brand-primary-light dark:bg-brand-primary-dark animate-pulse"></div>
             </div>
           </div>
           <div className="flex justify-center mt-16">
