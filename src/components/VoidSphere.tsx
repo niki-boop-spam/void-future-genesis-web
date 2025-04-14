@@ -1,7 +1,7 @@
 
-import { useRef, useEffect } from 'react';
+import { useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
-import { Sphere, MeshDistortMaterial } from '@react-three/drei';
+import { Sphere } from '@react-three/drei';
 import * as THREE from 'three';
 
 type VoidSphereProps = {
@@ -26,11 +26,8 @@ export const VoidSphere = ({
 
   return (
     <Sphere args={[1, 64, 64]} ref={meshRef} position={[0, 0, 0]} scale={1.8}>
-      <MeshDistortMaterial
+      <meshStandardMaterial
         color={color}
-        attach="material"
-        distort={distort}
-        speed={speed * 2}
         roughness={0.2}
         metalness={0.8}
       />

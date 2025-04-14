@@ -11,7 +11,7 @@ type ThreeSceneProps = {
 export const ThreeScene = ({ className = '' }: ThreeSceneProps) => {
   return (
     <div className={`w-full h-full min-h-[400px] ${className}`}>
-      <Canvas>
+      <Canvas dpr={[1, 2]} shadows>
         <Suspense fallback={null}>
           <ambientLight intensity={0.5} />
           <pointLight position={[10, 10, 10]} intensity={1} />
