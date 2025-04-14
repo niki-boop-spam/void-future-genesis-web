@@ -78,7 +78,7 @@ const Index = () => {
               </div>
             </div>
             <div className="lg:w-1/2 h-80 md:h-96 w-full bg-brand-secondary-light/30 dark:bg-brand-secondary-dark/50 rounded-2xl overflow-hidden shadow-lg flex items-center justify-center group hover:shadow-[0_0_30px_rgba(142,151,253,0.6)] dark:hover:shadow-[0_0_30px_rgba(124,154,146,0.6)] transition-all duration-500">
-              <div className="h-24 w-24 rounded-full bg-brand-primary-light dark:bg-brand-primary-dark group-hover:scale-[5] group-hover:bg-purple-500 dark:group-hover:bg-teal-400 transition-all duration-700"></div>
+              <div className="h-24 w-24 rounded-full bg-brand-primary-light dark:bg-brand-primary-dark group-hover:scale-[20] transition-all duration-[10000ms] group-hover:bg-purple-500 dark:group-hover:bg-teal-400"></div>
             </div>
           </div>
           <div className="flex justify-center mt-16">
