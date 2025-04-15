@@ -1,5 +1,7 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alice&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -99,7 +101,11 @@
   body {
     @apply bg-utility-background-primary-light dark:bg-utility-background-primary-dark 
            text-utility-text-primary-light dark:text-utility-text-primary-dark 
-           font-sans transition-colors duration-300;
+           font-alice transition-colors duration-300;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-seasons;
   }
 }
 

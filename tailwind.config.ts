@@ -22,7 +22,9 @@ export default {
 			fontFamily: {
 				sans: ['Inter', 'sans-serif'],
 				mono: ['Space Mono', 'monospace'],
-				display: ['Orbitron', 'sans-serif']
+				display: ['Orbitron', 'sans-serif'],
+				alice: ['Alice', 'serif'],
+				seasons: ['EB Garamond', 'serif']
 			},
 			colors: {
 				border: 'hsl(var(--border))',
