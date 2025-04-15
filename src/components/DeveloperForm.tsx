@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { useToast } from '@/hooks/use-toast';
@@ -150,10 +151,10 @@ export const DeveloperForm = ({ open, onClose }: { open: boolean; onClose: () =>
       <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <div className="flex items-center justify-between">
-            <DialogTitle className="text-2xl font-seasons">Join The Void Company as a Developer</DialogTitle>
+            <DialogTitle className="text-2xl font-seasons">Join The Void Company Team</DialogTitle>
           </div>
           <DialogDescription className="font-alice">
-            We're looking for talented developers to help build future tech. Please fill out the form below.
+            We're looking for talented individuals to help build future tech. Please fill out the form below.
           </DialogDescription>
         </DialogHeader>
 

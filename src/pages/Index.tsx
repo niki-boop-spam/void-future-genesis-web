@@ -19,9 +19,7 @@ const Index = () => {
   
   // Handler for careers button
   const handleCareersClick = () => {
-    if (developerSectionRef.current) {
-      developerSectionRef.current.scrollIntoView({ behavior: 'smooth' });
-    }
+    setShowDeveloperForm(true);
   };
 
   return (
@@ -260,7 +258,7 @@ const Index = () => {
                   onClick={() => setShowDeveloperForm(true)}
                   className="btn-primary glow-on-hover"
                 >
-                  Apply as Developer
+                  Join the Team
                 </button>
               </div>
             </div>
