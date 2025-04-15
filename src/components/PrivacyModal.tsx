@@ -1,6 +1,5 @@
 
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { X } from 'lucide-react';
 
 export const PrivacyModal = ({ open, onClose }: { open: boolean; onClose: () => void }) => {
   const currentDate = new Date().toLocaleDateString('en-US', {
@@ -13,27 +12,22 @@ export const PrivacyModal = ({ open, onClose }: { open: boolean; onClose: () => 
     <Dialog open={open} onOpenChange={onClose}>
       <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <div className="flex items-center justify-between">
-            <DialogTitle className="text-2xl font-display">Privacy Policy</DialogTitle>
-            <button onClick={onClose} className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800">
-              <X className="h-5 w-5" />
-            </button>
-          </div>
+          <DialogTitle className="text-2xl font-seasons">Privacy Policy</DialogTitle>
         </DialogHeader>
         
-        <div className="space-y-6 py-4">
+        <div className="space-y-6 py-4 font-alice">
           <p className="text-sm text-utility-text-secondary-light dark:text-utility-text-secondary-dark">
             Effective Date: {currentDate}
           </p>
           
-          <h3 className="text-xl font-semibold">Introduction</h3>
+          <h3 className="text-xl font-seasons font-semibold">Introduction</h3>
           <p className="leading-relaxed">
             The Void Company ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy 
             explains how we collect, use, disclose, and safeguard your information when you visit our website or 
             interact with our services.
           </p>
           
-          <h3 className="text-xl font-semibold mt-6">Information We Collect</h3>
+          <h3 className="text-xl font-seasons font-semibold mt-6">Information We Collect</h3>
           <p className="leading-relaxed">
             We collect personal data solely to respond to inquiries and evaluate developer applications. This may include:
           </p>
@@ -44,7 +38,7 @@ export const PrivacyModal = ({ open, onClose }: { open: boolean; onClose: () => 
             <li>Technical information about your device and interactions with our website</li>
           </ul>
           
-          <h3 className="text-xl font-semibold mt-6">How We Use Your Information</h3>
+          <h3 className="text-xl font-seasons font-semibold mt-6">How We Use Your Information</h3>
           <p className="leading-relaxed">
             We use the information we collect for various purposes, including:
           </p>
@@ -56,7 +50,7 @@ export const PrivacyModal = ({ open, onClose }: { open: boolean; onClose: () => 
             <li>Protecting our rights, property, or safety</li>
           </ul>
           
-          <h3 className="text-xl font-semibold mt-6">Data Sharing and Disclosure</h3>
+          <h3 className="text-xl font-seasons font-semibold mt-6">Data Sharing and Disclosure</h3>
           <p className="leading-relaxed">
             Data is not shared without permission. We may share your information with:
           </p>
@@ -66,14 +60,14 @@ export const PrivacyModal = ({ open, onClose }: { open: boolean; onClose: () => 
             <li>Business partners with your consent</li>
           </ul>
           
-          <h3 className="text-xl font-semibold mt-6">Data Security</h3>
+          <h3 className="text-xl font-seasons font-semibold mt-6">Data Security</h3>
           <p className="leading-relaxed">
             We implement appropriate technical and organizational measures to protect your personal data against 
             unauthorized access, alteration, disclosure, or destruction. However, no method of transmission over 
             the internet or electronic storage is 100% secure.
           </p>
           
-          <h3 className="text-xl font-semibold mt-6">Your Rights</h3>
+          <h3 className="text-xl font-seasons font-semibold mt-6">Your Rights</h3>
           <p className="leading-relaxed">
             Depending on your location, you may have the right to:
           </p>
@@ -88,25 +82,25 @@ export const PrivacyModal = ({ open, onClose }: { open: boolean; onClose: () => 
             To exercise these rights, please contact us at privacy@thevoidcompany.com.
           </p>
           
-          <h3 className="text-xl font-semibold mt-6">Cookies and Tracking Technologies</h3>
+          <h3 className="text-xl font-seasons font-semibold mt-6">Cookies and Tracking Technologies</h3>
           <p className="leading-relaxed">
             We use cookies and similar tracking technologies to collect information about your browsing activities. 
             You can manage your cookie preferences through your browser settings.
           </p>
           
-          <h3 className="text-xl font-semibold mt-6">Children's Privacy</h3>
+          <h3 className="text-xl font-seasons font-semibold mt-6">Children's Privacy</h3>
           <p className="leading-relaxed">
             Our services are not directed to individuals under the age of 16. We do not knowingly collect personal 
             information from children under 16.
           </p>
           
-          <h3 className="text-xl font-semibold mt-6">Changes to This Privacy Policy</h3>
+          <h3 className="text-xl font-seasons font-semibold mt-6">Changes to This Privacy Policy</h3>
           <p className="leading-relaxed">
             We may update this Privacy Policy from time to time. We will notify you of any changes by posting the 
             new Privacy Policy on this page and updating the effective date.
           </p>
           
-          <h3 className="text-xl font-semibold mt-6">Contact Us</h3>
+          <h3 className="text-xl font-seasons font-semibold mt-6">Contact Us</h3>
           <p className="leading-relaxed">
             If you have any questions about this Privacy Policy, please contact us at privacy@thevoidcompany.com.
           </p>

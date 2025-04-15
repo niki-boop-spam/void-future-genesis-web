@@ -1,8 +1,6 @@
-
 import { useState } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { useToast } from '@/hooks/use-toast';
-import { X } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 
 export const BusinessForm = ({ open, onClose }: { open: boolean; onClose: () => void }) => {
@@ -132,18 +130,13 @@ export const BusinessForm = ({ open, onClose }: { open: boolean; onClose: () => 
     <Dialog open={open} onOpenChange={onClose}>
       <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <div className="flex items-center justify-between">
-            <DialogTitle className="text-2xl font-display">Reach Out / Request Callback</DialogTitle>
-            <button onClick={onClose} className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800">
-              <X className="h-5 w-5" />
-            </button>
-          </div>
-          <DialogDescription>
+          <DialogTitle className="text-2xl font-seasons">Reach Out / Request Callback</DialogTitle>
+          <DialogDescription className="font-alice">
             Interested in our solutions? Fill out the form below and our team will get back to you.
           </DialogDescription>
         </DialogHeader>
 
-        <form onSubmit={handleSubmit} className="space-y-6 py-4">
+        <form onSubmit={handleSubmit} className="space-y-6 py-4 font-alice">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label htmlFor="fullName" className="label">Full Name *</label>
