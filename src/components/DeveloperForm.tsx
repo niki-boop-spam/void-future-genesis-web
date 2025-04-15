@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { useToast } from '@/hooks/use-toast';
@@ -151,17 +150,14 @@ export const DeveloperForm = ({ open, onClose }: { open: boolean; onClose: () =>
       <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <div className="flex items-center justify-between">
-            <DialogTitle className="text-2xl font-display">Join The Void Company as a Developer</DialogTitle>
-            <button onClick={onClose} className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800">
-              <X className="h-5 w-5" />
-            </button>
+            <DialogTitle className="text-2xl font-seasons">Join The Void Company as a Developer</DialogTitle>
           </div>
-          <DialogDescription>
+          <DialogDescription className="font-alice">
             We're looking for talented developers to help build future tech. Please fill out the form below.
           </DialogDescription>
         </DialogHeader>
 
-        <form onSubmit={handleSubmit} className="space-y-6 py-4">
+        <form onSubmit={handleSubmit} className="space-y-6 py-4 font-alice">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label htmlFor="fullName" className="label">Full Name *</label>
@@ -359,7 +355,7 @@ export const DeveloperForm = ({ open, onClose }: { open: boolean; onClose: () =>
           </div>
 
           <div>
-            <label htmlFor="technologies" className="label">Preferred Technologies or Interests *</label>
+            <label htmlFor="technologies" className="label">Preferred Technologies or Interests * (comma-separated values)</label>
             <input
               type="text"
               id="technologies"
@@ -370,6 +366,9 @@ export const DeveloperForm = ({ open, onClose }: { open: boolean; onClose: () =>
               placeholder="e.g., React, TypeScript, Node.js, Python, ML, AI..."
               disabled={isSubmitting}
             />
+            <p className="mt-1 text-xs text-utility-text-secondary-light dark:text-utility-text-secondary-dark">
+              Please provide technologies as comma-separated values (CSV)
+            </p>
             {errors.technologies && <p className="mt-1 text-sm text-semantic-error-light">{errors.technologies}</p>}
           </div>
 

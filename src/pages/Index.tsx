@@ -1,4 +1,3 @@
-
 import { useState, useRef } from 'react';
 import { ArrowRight, ChevronDown, Code, Database, FileText, Zap, Linkedin } from 'lucide-react';
 import ThemeToggle from '@/components/ThemeToggle';
@@ -32,13 +31,13 @@ const Index = () => {
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <div className="flex items-center space-x-2">
             <div className="h-10 w-10 rounded-full bg-brand-primary-light dark:bg-brand-primary-dark animate-pulse-subtle flex items-center justify-center overflow-hidden relative">
-              <VoidLogo className="absolute opacity-0 group-hover:opacity-100 transition-opacity duration-[10000ms] scale-50" />
+              <VoidLogo className="text-white absolute opacity-0 group-hover:opacity-100 transition-opacity duration-[10000ms] scale-50" />
             </div>
-            <span className="text-xl font-seasons font-semibold">The Void Company</span>
+            <span className="text-xl font-seasons">The Void Company</span>
           </div>
           
           <div className="flex items-center space-x-6">
-            <nav className="hidden md:flex space-x-6">
+            <nav className="hidden md:flex space-x-6 font-alice">
               <a href="#solutions" className="text-utility-text-primary-light dark:text-utility-text-primary-dark hover:text-brand-primary-light dark:hover:text-brand-primary-dark transition-colors">Solutions</a>
               <a href="#features" className="text-utility-text-primary-light dark:text-utility-text-primary-dark hover:text-brand-primary-light dark:hover:text-brand-primary-dark transition-colors">Features</a>
               <a href="#contact" className="text-utility-text-primary-light dark:text-utility-text-primary-dark hover:text-brand-primary-light dark:hover:text-brand-primary-dark transition-colors">Contact</a>
@@ -46,7 +45,7 @@ const Index = () => {
             <ThemeToggle />
             <button 
               onClick={() => setShowBusinessForm(true)}
-              className="hidden md:block btn-primary"
+              className="hidden md:block btn-primary font-alice"
             >
               Get Started
             </button>
@@ -59,22 +58,22 @@ const Index = () => {
         <div className="container mx-auto">
           <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-16">
             <div className="lg:w-1/2 space-y-6">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-seasons font-bold leading-tight">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-seasons leading-tight">
                 Building future tech for future generations.
               </h1>
-              <p className="text-lg md:text-xl text-utility-text-secondary-light dark:text-utility-text-secondary-dark max-w-2xl">
+              <p className="text-lg md:text-xl text-utility-text-secondary-light dark:text-utility-text-secondary-dark max-w-2xl font-alice">
                 We develop frameworks and tools that help businesses improve efficiency and scale innovation, transforming abstract possibilities into tangible results.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 pt-4">
                 <button 
                   onClick={() => setShowBusinessForm(true)}
-                  className="btn-primary"
+                  className="btn-primary font-alice"
                 >
                   Partner with us
                 </button>
                 <button 
                   onClick={() => setShowDeveloperForm(true)}
-                  className="btn-secondary"
+                  className="btn-secondary font-alice"
                 >
                   Join our team
                 </button>
@@ -82,14 +81,16 @@ const Index = () => {
             </div>
             <div className="lg:w-1/2 h-80 md:h-96 w-full bg-brand-secondary-light/30 dark:bg-brand-secondary-dark/50 rounded-2xl overflow-hidden shadow-lg flex items-center justify-center group hover:shadow-[0_0_30px_rgba(142,151,253,0.6)] dark:hover:shadow-[0_0_30px_rgba(124,154,146,0.6)] transition-all duration-500">
               <div className="h-24 w-24 rounded-full bg-brand-primary-light dark:bg-brand-primary-dark group-hover:scale-[20] transition-all duration-[10000ms] group-hover:bg-purple-500 dark:group-hover:bg-teal-400 relative flex items-center justify-center">
-                <VoidLogo className="absolute opacity-0 group-hover:opacity-100 transition-opacity duration-[10000ms] scale-75 text-white" />
+                <div className="absolute z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-[2000ms] delay-[2000ms]">
+                  <VoidLogo className="text-white" width={300} height={100} />
+                </div>
               </div>
             </div>
           </div>
           <div className="flex justify-center mt-16">
             <a 
               href="#solutions" 
-              className="flex flex-col items-center text-utility-text-secondary-light dark:text-utility-text-secondary-dark hover:text-brand-primary-light dark:hover:text-brand-primary-dark transition-colors"
+              className="flex flex-col items-center text-utility-text-secondary-light dark:text-utility-text-secondary-dark hover:text-brand-primary-light dark:hover:text-brand-primary-dark transition-colors font-alice"
             >
               <span className="mb-2">Explore our solutions</span>
               <ChevronDown className="h-6 w-6 animate-float" />
@@ -291,10 +292,10 @@ const Index = () => {
               <div className="h-8 w-8 rounded-full bg-brand-primary-light dark:bg-brand-primary-dark flex items-center justify-center">
                 <VoidLogo className="scale-50" />
               </div>
-              <span className="text-lg font-seasons font-semibold">The Void Company</span>
+              <span className="text-lg font-seasons">The Void Company</span>
             </div>
             
-            <div className="flex flex-wrap justify-center gap-4">
+            <div className="flex flex-wrap justify-center gap-4 font-alice">
               <button 
                 onClick={() => setShowAboutModal(true)}
                 className="text-utility-text-primary-light dark:text-utility-text-primary-dark hover:text-brand-primary-light dark:hover:text-brand-primary-dark transition-colors"
@@ -318,7 +319,7 @@ const Index = () => {
           
           <div className="mt-8 pt-8 border-t border-utility-text-secondary-light/20 dark:border-utility-text-secondary-dark/20">
             <div className="flex flex-col md:flex-row justify-between items-center">
-              <p className="text-utility-text-secondary-light dark:text-utility-text-secondary-dark text-sm">
+              <p className="text-utility-text-secondary-light dark:text-utility-text-secondary-dark text-sm font-alice">
                 &copy; {new Date().getFullYear()} The Void Company. All rights reserved.
               </p>
               
