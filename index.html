@@ -251,14 +251,31 @@
       margin-bottom: 1.5rem;
     }
     
-    /* Contact Section */
-    .contact-form {
-      max-width: 600px;
+    /* Contact Section - Modified to Join Team & Request Callback */
+    .contact-section {
+      max-width: 1280px;
       margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+    
+    @media (max-width: 768px) {
+      .contact-section {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    .form-box {
       background-color: white;
       padding: 3rem;
       border-radius: 1rem;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    }
+    
+    .form-box h3 {
+      font-size: 1.75rem;
+      margin-bottom: 1.5rem;
     }
     
     .form-group {
@@ -272,7 +289,8 @@
     }
     
     .form-group input,
-    .form-group textarea {
+    .form-group textarea,
+    .form-group select {
       width: 100%;
       padding: 0.75rem;
       border: 1px solid #e0e3e7;
@@ -281,7 +299,8 @@
     }
     
     .form-group input:focus,
-    .form-group textarea:focus {
+    .form-group textarea:focus,
+    .form-group select:focus {
       outline: none;
       border-color: #8e97fd;
       box-shadow: 0 0 0 2px rgba(142, 151, 253, 0.2);
@@ -345,6 +364,94 @@
       margin-top: 2rem;
     }
     
+    /* Modal styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 100;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(5px);
+    }
+    
+    .modal-content {
+      background-color: white;
+      margin: 5% auto;
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      max-width: 800px;
+      width: 90%;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+    
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    
+    .close:hover,
+    .close:focus {
+      color: black;
+      text-decoration: none;
+    }
+    
+    /* Feature cards */
+    .feature-card-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    
+    .feature-card {
+      background-color: white;
+      border-radius: 1rem;
+      padding: 2rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
+    }
+    
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    .feature-card h3 {
+      font-size: 1.75rem;
+      margin-bottom: 1rem;
+    }
+    
+    .feature-card p {
+      color: #a1a4b2;
+      margin-bottom: 0;
+    }
+    
+    /* Checkbox styles */
+    .checkbox-container {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 1.5rem;
+    }
+    
+    .checkbox-container input {
+      margin-right: 0.5rem;
+      margin-top: 0.25rem;
+    }
+    
+    .checkbox-container label {
+      font-size: 0.9rem;
+      color: #a1a4b2;
+    }
+    
     /* Animations */
     @keyframes pulse {
       0%, 100% { opacity: 1; }
@@ -369,7 +476,7 @@
         width: 100%;
       }
       
-      .contact-form {
+      .form-box {
         padding: 2rem;
       }
     }
@@ -423,59 +530,158 @@
     
     <section id="features" class="section">
       <h2 class="section-title">Key Features</h2>
-      <div class="features-container container">
-        <div class="feature">
-          <div class="feature-content">
-            <h3>Scalable Architecture</h3>
-            <p>Our solutions are built on a scalable architecture that grows with your business needs, from startup to enterprise.</p>
-            <a href="#contact" class="btn btn-primary">Learn More</a>
-          </div>
-          <div class="feature-image"></div>
+      <div class="feature-card-container container">
+        <div class="feature-card">
+          <h3>Scalable Architecture</h3>
+          <p>Our solutions are built on a scalable architecture that grows with your business needs, from startup to enterprise.</p>
         </div>
         
-        <div class="feature">
-          <div class="feature-content">
-            <h3>Advanced Security</h3>
-            <p>Enterprise-grade security features protect your data and applications from modern threats.</p>
-            <a href="#contact" class="btn btn-primary">Learn More</a>
-          </div>
-          <div class="feature-image"></div>
+        <div class="feature-card">
+          <h3>Advanced Security</h3>
+          <p>Enterprise-grade security features protect your data and applications from modern threats.</p>
         </div>
         
-        <div class="feature">
-          <div class="feature-content">
-            <h3>Developer Experience</h3>
-            <p>Built with developers in mind, our tools enhance productivity and reduce time-to-market.</p>
-            <a href="#contact" class="btn btn-primary">Learn More</a>
-          </div>
-          <div class="feature-image"></div>
+        <div class="feature-card">
+          <h3>Developer Experience</h3>
+          <p>Built with developers in mind, our tools enhance productivity and reduce time-to-market.</p>
         </div>
       </div>
     </section>
     
     <section id="contact" class="section">
       <h2 class="section-title">Contact Us</h2>
-      <div class="container">
-        <div class="contact-form">
-          <form>
+      <div class="contact-section container">
+        <!-- Join the Team Form -->
+        <div class="form-box">
+          <h3>Join Our Team</h3>
+          <form id="team-form">
             <div class="form-group">
-              <label for="name">Name</label>
-              <input type="text" id="name" required>
+              <label for="team-name">Full Name</label>
+              <input type="text" id="team-name" required>
             </div>
             <div class="form-group">
-              <label for="email">Email</label>
-              <input type="email" id="email" required>
+              <label for="team-email">Email</label>
+              <input type="email" id="team-email" required>
             </div>
             <div class="form-group">
-              <label for="message">Message</label>
-              <textarea id="message" required></textarea>
+              <label for="team-phone">Phone Number</label>
+              <input type="tel" id="team-phone" required>
             </div>
-            <button type="submit" class="form-submit">Send Message</button>
+            <div class="form-group">
+              <label for="team-role">Interested Role</label>
+              <select id="team-role" required>
+                <option value="">Select a role</option>
+                <option value="developer">Developer</option>
+                <option value="designer">Designer</option>
+                <option value="product">Product Manager</option>
+                <option value="marketing">Marketing</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="team-message">Tell us about yourself</label>
+              <textarea id="team-message" required></textarea>
+            </div>
+            <div class="checkbox-container">
+              <input type="checkbox" id="team-consent" required>
+              <label for="team-consent">I consent to The Void Company processing my data for recruitment purposes.</label>
+            </div>
+            <button type="submit" class="form-submit">Submit Application</button>
+          </form>
+        </div>
+        
+        <!-- Request a Callback Form -->
+        <div class="form-box">
+          <h3>Request a Callback</h3>
+          <form id="callback-form">
+            <div class="form-group">
+              <label for="callback-name">Full Name</label>
+              <input type="text" id="callback-name" required>
+            </div>
+            <div class="form-group">
+              <label for="callback-email">Email</label>
+              <input type="email" id="callback-email" required>
+            </div>
+            <div class="form-group">
+              <label for="callback-phone">Phone Number</label>
+              <input type="tel" id="callback-phone" required>
+            </div>
+            <div class="form-group">
+              <label for="callback-company">Company Name</label>
+              <input type="text" id="callback-company" required>
+            </div>
+            <div class="form-group">
+              <label for="callback-time">Preferred Time for Callback</label>
+              <input type="text" id="callback-time" placeholder="e.g., Weekdays 9AM-5PM EST" required>
+            </div>
+            <div class="form-group">
+              <label for="callback-message">How can we help you?</label>
+              <textarea id="callback-message" required></textarea>
+            </div>
+            <div class="checkbox-container">
+              <input type="checkbox" id="callback-consent" required>
+              <label for="callback-consent">I consent to The Void Company processing my data for business communication purposes.</label>
+            </div>
+            <button type="submit" class="form-submit">Request Callback</button>
           </form>
         </div>
       </div>
     </section>
   </main>
+
+  <!-- About Us Modal -->
+  <div id="about-modal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2 class="section-title">About The Void Company</h2>
+      <div class="space-y-6 py-4">
+        <p class="leading-relaxed">
+          The Void Company builds lean, scalable tech that helps businesses unlock their full potential. 
+          We believe in turning abstract possibilities into real, usable frameworks. Our minimalist, 
+          future-forward approach is about innovation, clarity, and intelligent systems.
+        </p>
+        
+        <h3 class="text-xl font-semibold mt-6">Our Mission</h3>
+        <p class="leading-relaxed">
+          To develop frameworks and tools that empower businesses to navigate the complexities of 
+          the digital landscape with confidence and efficiency. We're committed to creating 
+          solutions that are not only powerful but also intuitive and accessible.
+        </p>
+        
+        <h3 class="text-xl font-semibold mt-6">Our Vision</h3>
+        <p class="leading-relaxed">
+          A world where technology serves as a seamless extension of human creativity and potential, 
+          where businesses of all sizes can harness the power of advanced tools without getting 
+          lost in technical complexity.
+        </p>
+        
+        <h3 class="text-xl font-semibold mt-6">Our Core Values</h3>
+        <ul class="list-disc pl-6 space-y-2" style="margin-left: 1.5rem;">
+          <li><span class="font-medium">Innovation:</span> We continuously push the boundaries of what's possible.</li>
+          <li><span class="font-medium">Simplicity:</span> We believe the most powerful solutions are often the most elegant.</li>
+          <li><span class="font-medium">Integrity:</span> We maintain the highest standards of honesty and ethics in all our interactions.</li>
+          <li><span class="font-medium">Impact:</span> We measure our success by the positive change we create for our clients.</li>
+          <li><span class="font-medium">Collaboration:</span> We believe great ideas emerge from diverse perspectives working together.</li>
+        </ul>
+        
+        <h3 class="text-xl font-semibold mt-6">Our Approach</h3>
+        <p class="leading-relaxed">
+          At The Void Company, we take a holistic approach to technology development. We don't just 
+          build tools; we create ecosystems that enhance productivity, foster innovation, and scale 
+          with your business. Our frameworks are designed with the future in mind, anticipating 
+          changes in the technological landscape and adapting accordingly.
+        </p>
+        
+        <h3 class="text-xl font-semibold mt-6">Leadership Team</h3>
+        <p class="leading-relaxed">
+          Our team consists of industry veterans, visionary engineers, and passionate problem-solvers 
+          who are dedicated to pushing the boundaries of what technology can achieve. With decades of 
+          combined experience across various sectors, we bring a wealth of knowledge and insight to 
+          every project we undertake.
+        </p>
+      </div>
+    </div>
+  </div>
 
   <footer>
     <div class="container footer-container">
@@ -485,8 +691,8 @@
       </div>
       
       <div class="footer-links">
-        <a href="#">About Us</a>
-        <a href="#">Careers</a>
+        <a href="#" id="about-link">About Us</a>
+        <a href="#contact" id="careers-link">Careers</a>
         <a href="privacy.html">Privacy Policy</a>
       </div>
       
@@ -495,6 +701,65 @@
       </p>
     </div>
   </footer>
+
+  <!-- Modal and link functionality -->
+  <script>
+    // Get the modal
+    const modal = document.getElementById("about-modal");
+    
+    // Get the button that opens the modal
+    const aboutLink = document.getElementById("about-link");
+    
+    // Get the <span> element that closes the modal
+    const closeButton = document.getElementsByClassName("close")[0];
+    
+    // Get the careers link
+    const careersLink = document.getElementById("careers-link");
+    
+    // When the user clicks on the button, open the modal
+    aboutLink.onclick = function(e) {
+      e.preventDefault();
+      modal.style.display = "block";
+    }
+    
+    // When the user clicks on <span> (x), close the modal
+    closeButton.onclick = function() {
+      modal.style.display = "none";
+    }
+    
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+    
+    // Scroll to the join team form when careers is clicked
+    careersLink.onclick = function(e) {
+      e.preventDefault();
+      const teamForm = document.getElementById("team-form");
+      teamForm.scrollIntoView({ behavior: "smooth" });
+      
+      // Add a highlight effect
+      teamForm.parentElement.style.boxShadow = "0 0 20px rgba(142, 151, 253, 0.6)";
+      setTimeout(() => {
+        teamForm.parentElement.style.boxShadow = "";
+      }, 2000);
+    }
+    
+    // Simple form submission handlers
+    document.getElementById("team-form").addEventListener("submit", function(e) {
+      e.preventDefault();
+      alert("Thank you for your application! We'll be in touch soon.");
+      this.reset();
+    });
+    
+    document.getElementById("callback-form").addEventListener("submit", function(e) {
+      e.preventDefault();
+      alert("Thank you for your request! We'll contact you at your preferred time.");
+      this.reset();
+    });
+  </script>
 
   <!-- Required Lovable script tag -->
   <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
