@@ -107,6 +107,209 @@
       color: #8e97fd;
     }
     
+    /* Hero Section */
+    .hero {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding-top: 4rem;
+    }
+    
+    .hero-content {
+      max-width: 800px;
+    }
+    
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
+      line-height: 1.2;
+      color: #3f414e;
+    }
+    
+    .hero p {
+      font-size: 1.25rem;
+      margin-bottom: 2rem;
+      color: #a1a4b2;
+    }
+    
+    .cta-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+    
+    .btn {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.5rem;
+      font-family: 'Alice', serif;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    
+    .btn-primary {
+      background-color: #8e97fd;
+      color: white;
+    }
+    
+    .btn-primary:hover {
+      background-color: #7c9a92;
+      transform: translateY(-3px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    .btn-secondary {
+      background-color: transparent;
+      color: #3f414e;
+      border: 1px solid #3f414e;
+    }
+    
+    .btn-secondary:hover {
+      background-color: rgba(63, 65, 78, 0.1);
+      transform: translateY(-3px);
+    }
+    
+    /* Solutions Section */
+    .section {
+      padding: 5rem 2rem;
+    }
+    
+    .section-title {
+      text-align: center;
+      margin-bottom: 3rem;
+      font-size: 2.5rem;
+    }
+    
+    .solutions-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+    
+    .solution-card {
+      background-color: white;
+      border-radius: 1rem;
+      padding: 2rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
+    }
+    
+    .solution-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    .solution-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    
+    .solution-card p {
+      color: #a1a4b2;
+    }
+    
+    /* Features Section */
+    .features-container {
+      display: flex;
+      flex-direction: column;
+      gap: 4rem;
+    }
+    
+    .feature {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+    
+    .feature-content {
+      flex: 1;
+    }
+    
+    .feature-image {
+      flex: 1;
+      border-radius: 1rem;
+      overflow: hidden;
+      height: 300px;
+      background-color: #e0e3e7;
+    }
+    
+    .feature:nth-child(even) {
+      flex-direction: row-reverse;
+    }
+    
+    .feature h3 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    
+    .feature p {
+      color: #a1a4b2;
+      margin-bottom: 1.5rem;
+    }
+    
+    /* Contact Section */
+    .contact-form {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: white;
+      padding: 3rem;
+      border-radius: 1rem;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    }
+    
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+    
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid #e0e3e7;
+      border-radius: 0.5rem;
+      font-family: 'Alice', serif;
+    }
+    
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: #8e97fd;
+      box-shadow: 0 0 0 2px rgba(142, 151, 253, 0.2);
+    }
+    
+    .form-group textarea {
+      min-height: 150px;
+      resize: vertical;
+    }
+    
+    .form-submit {
+      display: block;
+      width: 100%;
+      padding: 0.75rem;
+      background-color: #8e97fd;
+      color: white;
+      border: none;
+      border-radius: 0.5rem;
+      font-family: 'Alice', serif;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .form-submit:hover {
+      background-color: #7c9a92;
+    }
+    
     /* Footer */
     footer {
       background-color: rgba(124, 154, 146, 0.1);
@@ -153,6 +356,22 @@
       nav {
         display: none;
       }
+      
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+      
+      .feature {
+        flex-direction: column !important;
+      }
+      
+      .feature-image {
+        width: 100%;
+      }
+      
+      .contact-form {
+        padding: 2rem;
+      }
     }
   </style>
 </head>
@@ -173,11 +392,89 @@
   </header>
 
   <main>
-    <!-- Your main content would go here -->
-    <!-- This is a simplified version of your React app -->
-    <div style="height: 100vh; display: flex; align-items: center; justify-content: center;">
-      <h1>Welcome to The Void Company</h1>
-    </div>
+    <section class="hero">
+      <div class="hero-content">
+        <h1>Building the Future of Technology</h1>
+        <p>The Void Company builds frameworks and tools to help businesses improve efficiency and scale innovation.</p>
+        <div class="cta-buttons">
+          <a href="#contact" class="btn btn-primary">Get Started</a>
+          <a href="#features" class="btn btn-secondary">Learn More</a>
+        </div>
+      </div>
+    </section>
+    
+    <section id="solutions" class="section">
+      <h2 class="section-title">Our Solutions</h2>
+      <div class="solutions-grid container">
+        <div class="solution-card">
+          <h3>Enterprise Framework</h3>
+          <p>A comprehensive framework for building complex enterprise applications with scale and security in mind.</p>
+        </div>
+        <div class="solution-card">
+          <h3>Data Analytics</h3>
+          <p>Powerful tools for processing and visualizing large datasets to unlock actionable business insights.</p>
+        </div>
+        <div class="solution-card">
+          <h3>Integration Platform</h3>
+          <p>Seamlessly connect your existing systems and applications with our robust integration platform.</p>
+        </div>
+      </div>
+    </section>
+    
+    <section id="features" class="section">
+      <h2 class="section-title">Key Features</h2>
+      <div class="features-container container">
+        <div class="feature">
+          <div class="feature-content">
+            <h3>Scalable Architecture</h3>
+            <p>Our solutions are built on a scalable architecture that grows with your business needs, from startup to enterprise.</p>
+            <a href="#contact" class="btn btn-primary">Learn More</a>
+          </div>
+          <div class="feature-image"></div>
+        </div>
+        
+        <div class="feature">
+          <div class="feature-content">
+            <h3>Advanced Security</h3>
+            <p>Enterprise-grade security features protect your data and applications from modern threats.</p>
+            <a href="#contact" class="btn btn-primary">Learn More</a>
+          </div>
+          <div class="feature-image"></div>
+        </div>
+        
+        <div class="feature">
+          <div class="feature-content">
+            <h3>Developer Experience</h3>
+            <p>Built with developers in mind, our tools enhance productivity and reduce time-to-market.</p>
+            <a href="#contact" class="btn btn-primary">Learn More</a>
+          </div>
+          <div class="feature-image"></div>
+        </div>
+      </div>
+    </section>
+    
+    <section id="contact" class="section">
+      <h2 class="section-title">Contact Us</h2>
+      <div class="container">
+        <div class="contact-form">
+          <form>
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" id="name" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" required>
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" required></textarea>
+            </div>
+            <button type="submit" class="form-submit">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer>
