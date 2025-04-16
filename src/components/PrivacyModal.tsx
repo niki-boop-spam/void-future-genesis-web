@@ -1,4 +1,3 @@
-
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 
 export const PrivacyModal = ({ open, onClose }: { open: boolean; onClose: () => void }) => {
@@ -102,7 +101,7 @@ export const PrivacyModal = ({ open, onClose }: { open: boolean; onClose: () => 
           
           <h3 className="text-xl font-seasons font-semibold mt-6">Contact Us</h3>
           <p className="leading-relaxed">
-            If you have any questions about this Privacy Policy, please contact us at privacy@thevoidcompany.com.
+            If you have any questions about this Privacy Policy, please contact us at <a href="mailto:service@thevoidcompany.org" className="text-brand-primary-light dark:text-brand-primary-dark underline">service@thevoidcompany.org</a>.
           </p>
           
           <p className="mt-6 font-medium">
